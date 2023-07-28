@@ -1,4 +1,3 @@
-
 const utils = (() => {
   let instance;
 
@@ -6,9 +5,9 @@ const utils = (() => {
     return {
       sum: function () {
         let nums = Array.prototype.slice.call(arguments);
-        return nums.reduce((numb, total) => numb + total, 0)
-      }
-    }
+        return nums.reduce((numb, total) => numb + total, 0);
+      },
+    };
   }
 
   return {
@@ -21,13 +20,13 @@ const utils = (() => {
 
       // Không khởi tạo nữa, chỉ trả về đối tượng đã khởi tạo
       return instance;
-    }
-  }
-})()
+    },
+  };
+})();
 
 const firstU = utils.getInstance(); // Cùng lấy 1 instance
 const secondU = utils.getInstance(); // Cùng lấy 1 instance
 
 console.log(firstU === secondU); // Trả về true là đúng vì cùng thuộc 1 instance duy nhất
 
-console.log(firstU.sum(1, 2, 3, 4, 5)) // 15 // working
+console.log(firstU.sum(1, 2, 3, 4, 5)); // 15 // working
