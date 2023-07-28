@@ -1,32 +1,38 @@
-function Car(name) {
+function Person(name, age) {
   this.name = name;
+  this.age = age;
 
-  // Default values
-  this.color = "White";
+  this.showName = () => console.log(this.name);
 }
 
-// Creating a new Object to decorate
-const tesla = new Car("Tesla Model 3");
+function PersonPrototype(prototype) {
+  const _prototype = prototype;
 
-// Decorating the object with new functionality
+  this.clone = () => {
+    let person = new Person();
+    person.name = _prototype.name;
+    person.age = _prototype.age;
 
-tesla.setColor = function (color) {
-  this.color = color;
-};
-
-tesla.setPrice = function (price) {
-  this.price = price;
-};
+    return person;
+  }
+}
 
 const store = (() => {
   let instance;
 
   function initialize() {
+    const profile = new Person("ABC", 25);
+
+    profile.setAge = function (age) {
+      this.age = age
+    };
+
+    profile.setName = function (name) {
+      this.name = name
+    };
+
     return {
-      sum: function () {
-        let nums = Array.prototype.slice.call(arguments);
-        return nums.reduce((numb, total) => numb + total, 0);
-      },
+      profile
     };
   }
 
@@ -40,9 +46,11 @@ const store = (() => {
   };
 })();
 
-const firstU = store.getInstance();
-const secondU = store.getInstance();
+// const person = new Person("Codestus.com", 20);
+// const prototypeOfPerson = new PersonPrototype(person);
+// const tester = prototypeOfPerson.clone();
 
-console.log(firstU === secondU);
+// tester.showName() // "Codestus.com"
 
-console.log(firstU.sum(1, 2, 3, 4, 5));
+const myStore = store.getInstance();
+myStore.profile.showName();
